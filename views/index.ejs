@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Countdown to D-Day!" />
+  <meta property="og:image" content="http://localhost:3000/og-image.png" />
+  <meta property="og:description" content="Time left until the event!" />
+  <title>Countdown to FUTO exams</title>
+</head>
+<body>
+  <h1>Countdown to FUTO exams</h1>
+  <p id="countdown">Loading...</p>
+  <p>Target day: <%= targetDate.toISOString() %></p>
+
+  <script>
+    // Set the target date
+    const targetDate = new Date("<%= targetDate.toISOString() %>");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = "The event has started!";
+        clearInterval(intervalId);  // Stop updating once the countdown reaches zero
+        return;
+      }
+
+      // Calculate time components
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      // Display the countdown
+      document.getElementById('countdown').textContent = 
+        `Days: ${days} | Hours: ${hours} | Minutes: ${minutes} | Seconds: ${seconds}`;
+    }
+
+    // Update countdown every second
+    const intervalId = setInterval(updateCountdown, 1000);
+    updateCountdown();  // Initial call to display immediately
+  </script>
+</body>
+</html>
