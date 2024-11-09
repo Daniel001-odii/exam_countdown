@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
 });
 
 // Serve dynamic OG image
-app.get('/og-image.png', async (req, res) => {
+app.get('/og-image.png', (req, res) => {
   try {
-    const imageBuffer = await generateOgImage(targetDate);
+    const imageBuffer = generateOgImage(targetDate);
     res.set('Content-Type', 'image/png');
     res.send(imageBuffer);
   } catch (error) {
