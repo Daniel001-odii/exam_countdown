@@ -8,12 +8,136 @@
   <meta property="og:image" content="https://exam-countdown.onrender.com/og-image.png" />
   <meta property="og:description" content="Time left until the event!" />
   <title>Countdown to FUTO exams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    body{
+        margin: 20px;
+        padding: 20px;
+        background-color: rgb(4, 50, 253);
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        
+      }
+      div{
+        background-color: rgb(173, 173, 173);
+        padding: 20px;
+      }
+    h1{
+        background-color:white;
+        padding: 10px;
+        border-radius: 20px;
+        border: 3px solid #000;
+    }
+    #countdown{
+        font-size: large;
+        background-color: rgb(9, 90, 255);
+        color: rgb(255, 255, 255);
+        font-size: 35px;
+        padding: 19px;
+        border-radius: 22px;
+        border: 2px solid #000000;
+    }
+    .dev{
+      color: rgb(5, 5, 5);
+      background-color: #ffffff;
+      padding: 12px;
+      margin: 20px;
+      border-radius: 9px;
+      border: 3px solid #000;
+    }
+    .tag{
+      color: blue;
+      background-color: #ffffff;
+      padding: 12px;
+      margin: 20px;
+      border-radius: 9px;
+      border: 3px solid #000;
+    }  /* the timer */
+    .innerhtml{
+      background-color: rgb(9, 90, 255);
+      color: rgb(255, 255, 255);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .days{
+      color:#fff;
+      background-color:red;
+      padding: 9px;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+    }
+    .hours{
+      color:#fff;
+      background-color:rgb(0, 17, 255);
+      padding: 9px;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+    }
+    .min{
+      color:#fff;
+      background-color:rgb(0, 195, 255);
+      padding: 9px;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+    }
+    .sec{
+      color:#0e0808;
+      background-color:rgb(0, 247, 255);
+      padding: 9px;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+    }
+    b{
+      font-size: 16px;
+    }
+    @media (max-width:500px) {
+        .innerhtml{
+          
+          display: flex;
+          flex-direction: column;
+        }  
+        #countdown{
+          width: 300px;
+          flex-wrap: wrap;
+        }
+        .days{
+          margin: 8px;
+        }
+        .hours{
+          margin: 8px;
+        }
+        .min{
+          margin: 8px;
+        } 
+        .sec{
+          margin: 8px;
+        }
+    }
+
+    /* style by patricknoni */
+  </style>
 </head>
 <body>
-  <h1>Countdown to FUTO exams</h1>
-  <p id="countdown">Loading...</p>
-  <p>Target day: <%= targetDate.toISOString() %></p>
-
+  <div>
+    <h1>Countdown to FUTO exams</h1>
+    <p id="countdown">Loading...</p>
+    <p class="tag">Target day: <%= targetDate.toISOString() %></p>
+    <p class="dev">This exam-countdown is built by <b>ode daniel
+      <i>(Backend dev)</i></b> and Chimuanya patrick <i>(frontend dev)</i></p>
+  </div>
   <script>
     // Set the target date
     const targetDate = new Date("<%= targetDate.toISOString() %>");
@@ -35,8 +159,18 @@
       const seconds = Math.floor((diff / 1000) % 60);
 
       // Display the countdown
-      document.getElementById('countdown').textContent = 
-        `Days: ${days} | Hours: ${hours} | Minutes: ${minutes} | Seconds: ${seconds}`;
+      document.getElementById('countdown').innerHTML = 
+        `<div class="innerhtml">
+        <span class="days">  ${days} <b>Days:</b></span>
+        
+        <span class="hours">  ${hours} <b>Hours:</b> 
+          </span> 
+        <span class="min"> ${minutes} <b>Minutes:</b>
+          </span>
+        <span class="sec"> ${seconds} <b>Seconds:</b>
+          </span>
+        </div>
+         `;
     }
 
     // Update countdown every second
