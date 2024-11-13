@@ -9,7 +9,7 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-const targetDate = new Date('2024-12-14');
+const targetDate = new Date('2024-12-09');
 
 // Serve the frontend
 app.get('/', (req, res) => {
